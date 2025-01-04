@@ -1,0 +1,183 @@
+/*全局样式重置*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+body {
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/*顶部 导航栏样式*/
+.nav {
+    position: fixed;/*子元素相对于父元素定位，不随着网页的滚动而滚动*/
+    top: 0;
+    width: 100%;
+
+    padding: 1rem 5%;
+    /* rem 是一个相对单位，相对于根元素（通常是HTML元素）的字体大小。如果根元素的字体大小没有被明确设置，那么1rem通常等于16像素。 */
+
+    background: rgba(255, 255, 255, 0.98);
+
+    backdrop-filter: blur(10px);
+    /*对元素的背景（包括元素的背景图片、颜色、渐变等）应用滤镜效果。这个属性可以让你对元素背后的区域（即元素下方的区域）应用模糊效果，而不是对元素本身的内容进行模糊。
+    backdrop-filter：指定了要对元素背后的区域应用滤镜效果。
+    blur(10px)：指定了模糊滤镜的效果，10px 表示模糊的程度，即模糊半径为10像素。*/
+
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);/*导航栏下方的阴影部分*/
+    display: flex;
+
+    justify-content: space-between;/*均匀分布*/
+    /* 例如，如果你有一个Flex容器，里面有三个项目，使用 justify-content: space-between; 后，这三个项目将会这样排列：
+    第一个项目靠近容器的开始边缘。
+    第三个项目靠近容器的结束边缘。
+    第二个项目位于第一个和第三个项目之间，使得第一个和第二个项目之间的空间与第二个和第三个项目之间的空间相等。 */
+
+    align-items: center;
+    z-index: 1000;/*堆叠级别*/
+    /* 更高 z-index 值的元素将会覆盖具有较低 z-index 值的元素 */
+}
+
+.nav-left img {
+    height: 80px;
+    border-radius: 50%;
+}
+
+.nav-right ul {
+    display: flex;
+
+    gap: 2.5rem;
+    /* 这个属性定义了相邻项目之间的空间，无论是在行（主轴）还是列（交叉轴）方向上。
+    gap: 2.5rem; 这行代码表示：
+    gap：指定了布局中项目之间的间距。
+    2.5rem：这是一个长度值，表示项目之间的间距为2.5个rem单位。 */
+}
+
+.nav-right li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    /*元素的位置可能会改变，但是它在文档流中的位置会被保留，这意味着其他元素的布局不会因它的移动而改变。*/
+}
+
+.nav-right a {
+    text-decoration: none;
+    background-image: linear-gradient(to right ,rgb(0, 128, 77) ,rgb(55, 196, 196) ,rgb(231, 65, 154) ,rgb(197, 212, 32));/*线性渐变  从左到右*/
+    background-clip: text;
+    /* 属性用于确定背景的绘制区域,这里就只应用于文本*/
+    -webkit-text-fill-color: transparent;
+    /*在这里，它被设置为 transparent（透明），使得文本本身不显示颜色，从而允许背景图像（渐变）透过文本显示出来。*/
+    font-weight: 500;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.nav-right img {
+    width: 25px;
+    height: 25px;
+    transition: all 0.3s ease;
+}
+
+/* 导航hover效果 */
+.nav-right li::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #3b82f6;
+    transition: width 0.3s ease;
+}
+
+.nav-right li:hover::after {
+    width: 100%;
+}
+
+.nav-right li:hover img,
+.nav-right li:hover a {
+    /* color: (135deg ,rgb(0, 128, 77) 0%,rgb(55, 196, 196) 40%,rgb(231, 65, 154) 80%,rgb(197, 212, 32) 100%); */
+    transform: translateY(-2px);
+}
+
+/* 头部/首页区域样式 */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 50%, #e0e7ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/></svg>') repeat;
+    opacity: 0.5;
+    animation: rotate 60s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }to {
+        transform: rotate(360deg);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right,rgb(255, 0, 0) 0%,rgb(25, 86, 216) 40%,rgb(231, 65, 154) 80%,rgb(197, 212, 32) 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 1s ease;
+}
+
+.subtitle {
+    font-size: 1.8rem;
+    color: #4b5563;
+    margin-bottom: 2.5rem;
+    animation: fadeInUp 1s ease 0.2s backwards;
+}
+
+.cta-button {
+    display: inline-block;/*转为行内块*/
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    animation: fadeInUp 1s ease 0.4s backwards;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
